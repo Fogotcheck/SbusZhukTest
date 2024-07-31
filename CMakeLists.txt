@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.22)
+
+project(SbusZhukTest VERSION 0.1.1 LANGUAGES C ASM)
+
+include(Cmake/Utils/CustomOpts.cmake)
+include(Cmake/Utils/ComponentsOpts.cmake)
+
+add_executable(${PROJECT_NAME})
+
+add_subdirectory(AppMain)
+add_subdirectory(Lib)
+
+target_post_build(${PROJECT_NAME})
+target_install_binary(${PROJECT_NAME})
+
+string(TIMESTAMP TODAY "%H%d%m%y")
+set(CPACK_PACKAGE_CHECKSUM MD5)
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}_${TODAY}")
+include(CPack)
